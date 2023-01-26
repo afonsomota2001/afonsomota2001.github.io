@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333333;
+        }
+
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white; 
+            color: #4CAF50; 
+            border: 5px solid #4CAF50;
+            font-size: 32px;
+        }
+
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button2 {
+            background-color: white; 
+            color: #008CBA; 
+            border: 2px solid #008CBA;
+        }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .button3 {
+            background-color: white; 
+            color: #FF3340; 
+            border: 2px solid #FF3340;
+        }
+
+        .button3:hover {
+            background-color: #FF3340;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <img src="logo.png" alt="Logo" width="100" height="70" style="float:left; margin: 10px">
+    
+    <br><h1 style="margin: 10px">Pill Dispenser</h1>
+    <div style="clear:both"></div>
+    <hr>
+    <nav>
+        <button onclick = "window.location.href='login.php'" class="button button1">Login</button> <br> <br>
+        <button onclick = "window.location.href='dataMed.php'"class="button button2">Medicamentos</button>
+        <button onclick = "window.location.href='data.php'" class="button button3">Utilizadores</button>
+    </nav>
+</body>

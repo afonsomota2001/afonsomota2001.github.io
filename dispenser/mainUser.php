@@ -64,10 +64,6 @@ if ($dbSuccess) {
             
 }
 
-$queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID";
-$resultMed = mysqli_query($conn, $queryPres);
-
-
 
 ?>
 
@@ -173,21 +169,26 @@ $resultMed = mysqli_query($conn, $queryPres);
         <td>End Date</td>
         <td>Notes</td>
         <td></td>
-
   </tr>
+
   <?php
-  // While there are rows in the result
-  while($rowMed = mysqli_fetch_assoc($resultMed)){
-    
-    $medication_id = $rowMed['medication_id'];
-    $start_date = $rowMed['start_date'];
-    $end_date = $rowMed['end_date'];
-    $notes = $rowMed['notes'];
-  
-    echo $rowMed["prescription_id"];
-    echo $rowMed["medication_id"];
-    echo $rowMed["start_date"];
-    echo $rowMed["end_date"];
-    echo $rowMed["notes"];
-  }
+      $queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID";
+      $resultMed = mysqli_query($conn, $queryPres);
+      
   ?>
+  <?php
+  foreach ($resultMed as $rowMed): ?>
+
+  <td>><?php echo $rowMed["prescription_id"];?></td>
+  <td>><?php echo $rowMed["medication_id"];?></td>
+  <td>><?php echo $rowMed["start_date"];?></td>
+  <td>><?php echo $rowMed["end_date"];?></td>
+  <td>><?php echo $rowMed["notes"];?></td>
+   </tr>
+      <?php endforeach; ?>
+    </table>
+    <br>
+    
+  </body>
+</html>
+
