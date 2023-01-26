@@ -11,33 +11,26 @@ if(isset($_POST["submit"])){
     $end_date = $_POST['end_date'];
     $notes = $_POST['notes'];
 
-    // Insert data into prescriptions table
-    $sql = "INSERT INTO prescriptions (user_id, medication_id, start_date, end_date, notes) VALUES ('$user_id', '$medication_id', '$start_date', '$end_date', '$notes')";
-
-    if (mysqli_query($conn, $sql)) {
-      echo
-      "
-      <script>
-        alert('Successfully Added');
-        document.location.href = 'mainUser.php';
-      </script>
-      ";
-
+    // Check if a prescription with the same medication ID already exists for the user
+    $check_query = "SELECT * FROM prescriptions WHERE user_id = '$user_id' AND medication_id = '$medication_id'";
+    $check_result = mysqli_query($conn, $check_query);
+    if(mysqli_num_rows($check_result) > 0){
+        echo "<script>alert('A prescription with the same medication ID already exists for this user. Please enter a different medication ID.');</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
+        // Insert data into prescriptions table
+        $sql = "INSERT INTO prescriptions (user_id, medication_id, start_date, end_date, notes) VALUES ('$user_id', '$medication_id', '$start_date', '$end_date', '$notes')";
 
-   
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('Successfully Added'); document.location.href = 'mainUser.php?id=$user_id';</script>";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+    mysqli_close($conn);
 }
 
-  // Get all medications from medications table
-  $query = "SELECT * FROM `medications`";
-  $result = mysqli_query($conn, $query);
-
-
- mysqli_close($conn);
-
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -91,8 +84,11 @@ if(isset($_POST["submit"])){
     <th>Frequency</th>
 
   </tr>
-  <?php
 
+  <?php
+    // Get all medications from medications table
+    $query = "SELECT * FROM `medications`";
+    $result = mysqli_query($conn, $query);
 
   // While there are rows in the result
   while($row = mysqli_fetch_assoc($result)){
@@ -101,7 +97,6 @@ if(isset($_POST["submit"])){
     $dose = $row['dose'];
     $frequency = $row['frequency'];
   
-
     // Output a row in the table for each medication
     echo "<tr>";
     echo "<td>$medication_id</td>";

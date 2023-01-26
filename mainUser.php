@@ -163,12 +163,12 @@ if ($dbSuccess) {
 
     <table border="1" cellspacing="0" cellpadding="10">
   <tr>
-        <td>Prescription IDds+acina+dkcn</td>
+        <td>Prescription IDn</td>
         <td>Medication ID</td>
         <td>Start Date</td>
         <td>End Date</td>
         <td>Notes</td>
-        <td></td>
+
   </tr>
 
   <?php
@@ -179,11 +179,11 @@ if ($dbSuccess) {
   <?php
   foreach ($resultMed as $rowMed): ?>
 
-  <td>><?php echo $rowMed["prescription_id"];?></td>
-  <td>><?php echo $rowMed["medication_id"];?></td>
-  <td>><?php echo $rowMed["start_date"];?></td>
-  <td>><?php echo $rowMed["end_date"];?></td>
-  <td>><?php echo $rowMed["notes"];?></td>
+  <td><?php echo $rowMed["prescription_id"];?></td>
+  <td><?php echo $rowMed["medication_id"];?></td>
+  <td><?php echo $rowMed["start_date"];?></td>
+  <td><?php echo $rowMed["end_date"];?></td>
+  <td><?php echo $rowMed["notes"];?></td>
    </tr>
       <?php endforeach; ?>
     </table>
