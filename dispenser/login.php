@@ -52,5 +52,5 @@ mysqli_close($conn);
 </form> 
 <br>
 <br>
-<a href="index.php">Back</a> <br>
+<a href="index.html">Back</a> <br>
 </body>
