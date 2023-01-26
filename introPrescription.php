@@ -10,25 +10,59 @@ if(isset($_POST["submit"])){
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     $notes = $_POST['notes'];
+    $times_to_take_a_day = $_POST['times_per_day'];
+    $hours_to_take = $_POST['hours_to_take'];
+    $hours_array = explode('/', $hours_to_take);
+
+
+    $check_medication_query = "SELECT * FROM medications WHERE medication_id = '$medication_id'";
+    $check_medication_result = mysqli_query($conn, $check_medication_query);
+    
+    if(mysqli_num_rows($check_medication_result) == 0){
+        echo "<script>
+        alert('Medication ID not found. Please enter a valid medication ID.'); 
+        document.location.href = 'mainUser.php?id=$user_id';
+        </script>";
+        exit();
+    }
 
     // Check if a prescription with the same medication ID already exists for the user
     $check_query = "SELECT * FROM prescriptions WHERE user_id = '$user_id' AND medication_id = '$medication_id'";
     $check_result = mysqli_query($conn, $check_query);
     if(mysqli_num_rows($check_result) > 0){
-        echo "<script>alert('A prescription with the same medication ID already exists for this user. Please enter a different medication ID.');</script>";
-    } else {
+        echo "<script>
+        alert('A prescription for that medication already exists for this user. Please enter a different medication.'); 
+        document.location.href = 'mainUser.php?id=$user_id';
+        </script>";
+      
+      } else {      
+              
+        foreach ($hours_array as $hour) {
+          if (!preg_match('/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/', $hour)) {
+              echo "<script>
+              alert('Please enter the hours to take in the format of HH:MM (24 hour time)'); 
+              document.location.href = 'mainUser.php?id=$user_id';
+              </script>";
+              exit();
+          }else{
+        
         // Insert data into prescriptions table
-        $sql = "INSERT INTO prescriptions (user_id, medication_id, start_date, end_date, notes) VALUES ('$user_id', '$medication_id', '$start_date', '$end_date', '$notes')";
+        $sql = "INSERT INTO prescriptions (user_id, medication_id, start_date, end_date, notes, times_per_day, hours_to_take) VALUES ('$user_id', '$medication_id', '$start_date', '$end_date', '$notes', '$times_to_take_a_day', '$hours_to_take')";
 
         if (mysqli_query($conn, $sql)) {
-            echo "<script>alert('Successfully Added'); document.location.href = 'mainUser.php?id=$user_id';</script>";
+            echo "<script>alert('Successfully Added'); 
+            document.location.href = 'mainUser.php?id=$user_id';</script>";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-    }
-    mysqli_close($conn);
-}
 
+        mysqli_close($conn);
+      }
+        
+    }
+    
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +102,12 @@ if(isset($_POST["submit"])){
 
     <label for="end_date">End Date:</label><br>
     <input type="date" id="end_date" name="end_date"><br>
+
+    <label for="times_per_day">Times to take a day:</label> <br>
+    <input type="text" name="times_per_day" id="times_per_day"> <br>
+    
+    <label for="hours_to_take">Hours to take:</label> <br>
+    <input type="text" name="hours_to_take" id="hours_to_take"> <br>
 
     <label for="notes">Notes:</label><br>
     <textarea id="notes" name="notes"></textarea><br><br>
