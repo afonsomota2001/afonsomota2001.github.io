@@ -163,7 +163,7 @@ if ($dbSuccess) {
 
     <table border="1" cellspacing="0" cellpadding="10">
   <tr>
-        <td>Prescription ID</td>
+        <td>Prescription IDds+acina+dkcn</td>
         <td>Medication ID</td>
         <td>Start Date</td>
         <td>End Date</td>
