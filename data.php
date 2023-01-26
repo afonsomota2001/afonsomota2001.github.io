@@ -45,7 +45,7 @@ require 'connection.php';
 </style>
 
   <body>
-  <button onclick = "window.location.href='index.php'" class="button button1">Menu Principal </button> <br>
+  <button onclick = "window.location.href='index.html'" class="button button1">Menu Principal </button> <br>
   <button onclick = "window.location.href='introUser.php'" class="button button2">Upload Utilizador </button> <br>
 
   <br>
