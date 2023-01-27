@@ -27,8 +27,6 @@ if ($dbSuccess) {
 
  
      if($infoID ==0){
-      
-     // If nothing is selected
        
       header('Location:data.php'); 
   }

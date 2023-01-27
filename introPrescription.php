@@ -45,23 +45,31 @@ if(isset($_POST["submit"])){
               </script>";
               exit();
           }else{
+            if (count($hours_array) != $times_to_take_a_day) {
+              echo "<script>
+              alert('The number of hours to take must match the number of times per day'); 
+              document.location.href = 'mainUser.php?id=$user_id';
+              </script>";
+              exit();
+          }else{
+              // Insert data into prescriptions table
+              $sql = "INSERT INTO prescriptions (user_id, medication_id, start_date, end_date, notes, times_per_day, hours_to_take) VALUES ('$user_id', '$medication_id', '$start_date', '$end_date', '$notes', '$times_to_take_a_day', '$hours_to_take')";
         
-        // Insert data into prescriptions table
-        $sql = "INSERT INTO prescriptions (user_id, medication_id, start_date, end_date, notes, times_per_day, hours_to_take) VALUES ('$user_id', '$medication_id', '$start_date', '$end_date', '$notes', '$times_to_take_a_day', '$hours_to_take')";
-
-        if (mysqli_query($conn, $sql)) {
+        
+              if (mysqli_query($conn, $sql)) {
             echo "<script>alert('Successfully Added'); 
             document.location.href = 'mainUser.php?id=$user_id';</script>";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
-        mysqli_close($conn);
-      }
+          mysqli_close($conn);
+       }
         
-    }
+      }
     
-  }
+    }
+  } 
 }
 ?>
 

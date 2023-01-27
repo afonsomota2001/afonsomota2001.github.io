@@ -124,7 +124,7 @@ if ($dbSuccess) {
 </style>
 
   <body>
-  <button onclick = "window.location.href='index.php'" class="button button1">Menu </button> <br>
+  <button onclick = "window.location.href='index.html'" class="button button1">Menu </button> <br>
   <button onclick = "window.location.href='introUser.php'" class="button button2">Upload User </button> <br>
   <button onclick = "window.location.href='introPrescription.php?id=<?php echo $user_id; ?>'" class="button button3">Insert Prescription</button>
 

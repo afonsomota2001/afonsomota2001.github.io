@@ -2,87 +2,53 @@
 <?php
 require 'connection.php';
 
-//Connection Error
-if ($conn->connect_error){     
-
+// Connection Error
+if ($conn->connect_error) {     
     die("Connection failed: " . $conn->connect_error);
-
 }
+
 // Connected to Database JaneDB
-// Object oriented  -> pointing 
-if($conn->query("SELECT DATABASE()")){
-    
- $dbSuccess =true;
- //
- $result = $conn->query("SELECT DATABASE()");
- $row = $result->fetch_row();
- $result->close();
-
+if ($conn->query("SELECT DATABASE()")) {
+    $dbSuccess = true;
+    $result = $conn->query("SELECT DATABASE()");
+    $row = $result->fetch_row();
+    $result->close();
 }
-
 
 if ($dbSuccess) {
- 
-    //  Get the details of the company selected 
-        $medication_id = $_GET["medication_id"];
-  
-   
-       if($medication_id ==0){
-        //header('Location:dataMed.php'); 
-       // If nothing is selected
-  
+    $medication_id = $_GET["medication_id"];
+    if ($medication_id == 0) {
+        header('Location:dataMed.php'); 
     }
-                  
-        // Execute Query
-        $query="SELECT * FROM medications WHERE medication_id= '$medication_id'";
-        $cname__select_Query= mysqli_query($conn, $query);
-    
+
+    // Execute Query
+    $query = "SELECT * FROM medications WHERE medication_id = '$medication_id'";
+    $cname__select_Query = mysqli_query($conn, $query);
+
     // While there is info in row
-         
-    while($rows=mysqli_fetch_assoc($cname__select_Query)){
-                
-                   $name = $rows['name'];
-                   $dose = $rows['dose'];
-                   $frequency = $rows['frequency'];
-                   $medication_id= $rows['medication_id'];
-  
-                  
-  
-  
-          }
-            
-  }
+    while ($rows = mysqli_fetch_assoc($cname__select_Query)) {
+        $name = $rows['name'];
+        $dose = $rows['dose'];
+        $frequency = $rows['frequency'];
+        $medication_id = $rows['medication_id'];
+    }
+}
 
+if (isset($_POST["submit"])) {
+    $name = $_POST["name"];
+    $dose = $_POST["dose"];
+    $frequency = $_POST["frequency"];
 
-if($conn->query("SELECT DATABASE()")){
-    
-   $dbSuccess =true;
-   //
-   $result = $conn->query("SELECT DATABASE()");
-   $row = $result->fetch_row();
-   $result->close();
-
- 
-     $query = "UPDATE medications SET name ='$name', dose='$dose', frequency='$frequency', WHERE medication_id = '$medication_id'";
-     mysqli_query($conn, $query);
-     echo
-     
-
-     "
-     <script>
-       alert('Successfully Edited');
-       document.location.href = 'data.php';
-     </script>
-     ";
-   }
-
- 
-
-
-
-
-
-
+    // fix the error in SQL syntax
+    $query = "UPDATE medications SET name = '$name', dose = '$dose', frequency = '$frequency' WHERE medication_id = '$medication_id'";
+    mysqli_query($conn, $query);
+    echo "
+        <script>
+            alert('Successfully Edited');
+            document.location.href = 'dataMed.php';
+        </script>
+    ";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -95,7 +61,7 @@ if($conn->query("SELECT DATABASE()")){
 
       <?php
       $i = 1;
-      $rows = mysqli_query($conn, "SELECT *FROM medications WHERE medication_id= '$infomedication_id'")
+      $rows = mysqli_query($conn, "SELECT *FROM medications WHERE medication_id= '$medication_id'")
       ?>
 
       <?php foreach ($rows as $row) : ?>
