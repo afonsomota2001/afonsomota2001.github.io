@@ -45,7 +45,7 @@ if (isset($_POST["submit"])) {
     echo "
         <script>
             alert('Successfully Edited');
-            document.location.href = 'dataMed.php';
+            document.location.href = 'dataMed\\890«.php';
         </script>
     ";
 }
