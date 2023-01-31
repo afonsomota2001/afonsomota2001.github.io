@@ -18,18 +18,19 @@ if($conn->query("SELECT DATABASE()")){
   $result->close();
 
 }
-// Get the medication_id of the prescription to be archived
-$medication_id = $_GET['medication_id'];
-
+// Get the prescription_id of the prescription to be archived
+$prescription_id = $_GET['prescription_id'];
 
 // Mark the prescription as archived
-$sql = "UPDATE prescription SET is_archived=1 WHERE medication_id=$medication_id";
+$sql = "UPDATE prescriptions SET is_archived=1 WHERE prescription_id=$prescription_id";
 mysqli_query($conn, $sql);
 
-// Close the database connection
-mysqli_close($conn);
 
-// Redirect the user back to the main page
-header("Location: mainUser.php");
-exit;
+$selectuserID = "SELECT user_id FROM `prescriptions` WHERE prescription_id=$prescription_id ";
+$result = mysqli_query($conn, $selectuserID);
+$row = mysqli_fetch_assoc($result);
+$userID = $row['user_id'];
+
+header("Location: mainUser.php?id=$userID");
+
 ?>

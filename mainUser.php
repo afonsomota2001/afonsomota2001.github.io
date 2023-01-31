@@ -168,7 +168,8 @@ if ($dbSuccess) {
   <td><?php echo $rowMed["times_per_day"];?></td>
   <td><?php echo $rowMed["hours_to_take"];?></td>
   <td><?php echo $rowMed["notes"];?></td>
-  <td><?php echo '<a href="archivePrescription.php?id=',$row["id"],'">Archive</a>'; ?></td>
+  <td><?php echo '<a href="EditPrescription.php?prescription_id=',$rowMed["prescription_id"],'">Edit</a>'; ?></td>
+  <td><?php echo '<a href="archivePrescription.php?prescription_id=',$rowMed["prescription_id"],'">Archive</a>'; ?></td>
 
    </tr>
       <?php endforeach; ?>
