@@ -1,72 +1,46 @@
 <?php
 require 'connection.php';
 
-//Connection Error
-if ($conn->connect_error){     
-
+// Connection Error
+if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-
 }
+
 // Connected to Database JaneDB
 // Object oriented  -> pointing 
-if($conn->query("SELECT DATABASE()")){
-    
- $dbSuccess =true;
- //
- $result = $conn->query("SELECT DATABASE()");
- $row = $result->fetch_row();
- $result->close();
-
-}
-
-
-if($conn->query("SELECT DATABASE()")){
-     
-    $dbSuccess =true;
+if ($conn->query("SELECT DATABASE()")) {
+    $dbSuccess = true;
     //
     $result = $conn->query("SELECT DATABASE()");
     $row = $result->fetch_row();
     $result->close();
-
 }
-
 
 if ($dbSuccess) {
- 
-    //  Get the details of the company selected 
-        $infoID = $_GET["id"];
+    // Get the details of the company selected
+    $infoID = $_GET["id"];
 
-   if($infoID ==0){
-        
-       // If nothing is selected
-         
-        header('Location:data.php'); 
+    if ($infoID == 0) {
+        // If nothing is selected
+        header('Location:data.php');
     }
-                  
-        // Execute Query
-        $query="SELECT * FROM users WHERE id='$infoID'";
-        $cname__select_Query= mysqli_query($conn, $query);
-    
+
+    // Execute Query
+    $query = "SELECT * FROM users WHERE id='$infoID'";
+    $cname__select_Query = mysqli_query($conn, $query);
+
     // While there is info in row
-         
-    while($rows=mysqli_fetch_assoc($cname__select_Query)){
-                
-                   $name = $rows['name'];
-                   $date = $rows['date'];
-                   $pathology = $rows['pathology'];
-                   $id_number = $rows['id_number'];
-                   $user_id = $rows['id'];
-                   $profile_picture = $rows['profile_picture'];
-                  
-
-
-          }
-            
+    while ($rows = mysqli_fetch_assoc($cname__select_Query)) {
+        $name = $rows['name'];
+        $date = $rows['date'];
+        $pathology = $rows['pathology'];
+        $id_number = $rows['id_number'];
+        $user_id = $rows['id'];
+        $profile_picture = $rows['profile_picture'];
+    }
 }
 
-
 ?>
-
 
 
 <!DOCTYPE html>
@@ -128,7 +102,7 @@ if ($dbSuccess) {
   <button onclick = "window.location.href='introUser.php'" class="button button2">Upload User </button> <br>
   <button onclick = "window.location.href='introPrescription.php?id=<?php echo $user_id; ?>'" class="button button3">Insert Prescription</button>
 
-
+ 
   <br>
 <br>
 <br>
@@ -161,6 +135,12 @@ if ($dbSuccess) {
     <br>
     <br>
 
+    <br>
+  
+  Active Prescriptions
+  <br>
+  <br>
+
     <table border="1" cellspacing="0" cellpadding="10">
   <tr>
         <td>Prescription ID</td>
@@ -174,7 +154,7 @@ if ($dbSuccess) {
   </tr>
 
   <?php
-      $queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID";
+      $queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID AND is_archived = 0 ";
       $resultMed = mysqli_query($conn, $queryPres);
       
   ?>
@@ -188,11 +168,50 @@ if ($dbSuccess) {
   <td><?php echo $rowMed["times_per_day"];?></td>
   <td><?php echo $rowMed["hours_to_take"];?></td>
   <td><?php echo $rowMed["notes"];?></td>
+  <td><?php echo '<a href="archivePrescription.php?id=',$row["id"],'">Archive</a>'; ?></td>
+
    </tr>
       <?php endforeach; ?>
     </table>
     <br>
     
+
+    Archived Prescriptions 
+      <br>
+  <br>
+
+    <table border="1" cellspacing="0" cellpadding="10">
+  <tr>
+        <td>Prescription ID</td>
+        <td>Medication ID</td>
+        <td>Start Date</td>
+        <td>End Date</td>
+        <td>Tooks per day</td>
+        <td>Hours to take</td>
+        <td>Notes</td>
+
+  </tr>
+
+  <?php
+      $queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID AND is_archived = 1 ";
+      $resultMed = mysqli_query($conn, $queryPres);
+      
+  ?>
+  <?php
+  foreach ($resultMed as $rowMed): ?>
+
+  <td><?php echo $rowMed["prescription_id"];?></td>
+  <td><?php echo $rowMed["medication_id"];?></td>
+  <td><?php echo $rowMed["start_date"];?></td>
+  <td><?php echo $rowMed["end_date"];?></td>
+  <td><?php echo $rowMed["times_per_day"];?></td>
+  <td><?php echo $rowMed["hours_to_take"];?></td>
+  <td><?php echo $rowMed["notes"];?></td>
+
+   </tr>
+      <?php endforeach; ?>
+    </table>
+    <br>
   </body>
 </html>
 
