@@ -53,7 +53,7 @@ if(isset($_POST["submit"])){
               exit();
           }else{
               // Insert data into prescriptions table
-              $sql = "INSERT INTO prescriptions (user_id, medication_id, start_date, end_date, notes, times_per_day, hours_to_take) VALUES ('$user_id', '$medication_id', '$start_date', '$end_date', '$notes', '$times_to_take_a_day', '$hours_to_take')";
+              $sql = "INSERT INTO prescriptions (user_id, medication_id, start_date, end_date, notes, times_per_day, hours_to_take, is_archived) VALUES ('$user_id', '$medication_id', '$start_date', '$end_date', '$notes', '$times_to_take_a_day', '$hours_to_take', 0)";
         
         
               if (mysqli_query($conn, $sql)) {

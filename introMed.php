@@ -55,5 +55,9 @@ if(isset($_POST["submit"])){
 <br>
 <br>
 <a href="dataMed.php">Dados medicamentos</a> <br>
+<a href="javascript:history.back()">Back</a>
+
 </body>
+
+
 
