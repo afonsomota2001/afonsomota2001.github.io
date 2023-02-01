@@ -70,6 +70,8 @@ require 'connection.php';
         <td><?php echo $row["dose"]; ?></td>
         <td><?php echo $row["frequency"]; ?></td>
         <td><?php echo '<a href="infoEditMed.php?medication_id=',$row["medication_id"],'">Edit</a>'; ?></td>
+        <td><?php echo '<a href="infoAddMed.php?medication_id=',$row["medication_id"],'">Add Pills</a>'; ?></td>
+
       </tr>
       <?php endforeach; ?>
     </table>
