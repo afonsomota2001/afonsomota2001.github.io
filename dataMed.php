@@ -57,6 +57,8 @@ require 'connection.php';
         <td>Name</td>
         <td>Dose</td>
         <td>Frequency</td>
+        <td>Number of Pills</td>
+
       </tr>
       <?php
       $i = 1;
@@ -69,6 +71,7 @@ require 'connection.php';
         <td><?php echo $row["name"]; ?></td>
         <td><?php echo $row["dose"]; ?></td>
         <td><?php echo $row["frequency"]; ?></td>
+        <td><?php echo $row["number_of_pills"]; ?></td>
         <td><?php echo '<a href="infoEditMed.php?medication_id=',$row["medication_id"],'">Edit</a>'; ?></td>
         <td><?php echo '<a href="infoAddMed.php?medication_id=',$row["medication_id"],'">Add Pills</a>'; ?></td>
 

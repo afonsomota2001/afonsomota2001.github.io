@@ -12,15 +12,22 @@ $medication_id = $_GET['medication_id'];
 
 if (isset($_POST['submit'])) {
 
-  $num_pills = $_POST['num_pills'];
+  $num_pills_toAdd = $_POST['num_pills'];
 
+  $result = mysqli_query($conn, "SELECT number_of_pills FROM medications WHERE medication_id = $medication_id");
+  $row = mysqli_fetch_assoc($result);
+  $num_pills_inDisp = $row['number_of_pills'];
+  
+  $num_pills_total = $num_pills_toAdd + $num_pills_inDisp;
 
-  $sql = "INSERT INTO dispenser (medication_id, num_pills) VALUES ($medication_id, $num_pills)";
+  $sql = "UPDATE medications SET number_of_pills = $num_pills_total WHERE medication_id = $medication_id";
   mysqli_query($conn, $sql);
 
   header("Location: dataMed.php");
 
 }
+
+
 
 
 
@@ -39,6 +46,7 @@ if (isset($_POST['submit'])) {
         <td>Name</td>
         <td>Dose</td>
         <td>Frequency</td>
+        <td>Number of pills </td>
       </tr>
       <?php
       $i = 1;
@@ -51,6 +59,7 @@ if (isset($_POST['submit'])) {
         <td><?php echo $row["name"]; ?></td>
         <td><?php echo $row["dose"]; ?></td>
         <td><?php echo $row["frequency"]; ?></td>
+        <td><?php echo $row["number_of_pills"]; ?></td>
 
       </tr>
       <?php endforeach; ?>
@@ -58,7 +67,7 @@ if (isset($_POST['submit'])) {
     <br>
 
     <form action="" method="post">
-  <label for="num_pills">Number of pills:</label>
+  <label for="num_pills">Number of pills to add:</label>
   <input type="text" id="num_pills" name="num_pills">
   <input type="submit" name="submit" value="Submit">
 </form>
