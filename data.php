@@ -73,6 +73,9 @@ require 'connection.php';
         <td> <img src="img/<?php echo $row["profile_picture"]; ?>" width = 200 title="<?php echo $row['profile_picture']; ?>"> </td>
         <td><?php echo $row["pathology"]; ?></td>
         <td><?php echo $row["id_number"]; ?></td>
+        <td><?php echo '<a href="archiveUser.php?id=',$row["id"],'">Archive</a>'; ?></td>
+
+
 
       </tr>
       <?php endforeach; ?>

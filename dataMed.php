@@ -62,7 +62,7 @@ require 'connection.php';
       </tr>
       <?php
       $i = 1;
-      $rows = mysqli_query($conn, "SELECT *FROM medications ORDER BY medication_id ASC")
+      $rows = mysqli_query($conn, "SELECT *FROM medications ORDER BY name ASC")
       ?>
 
       <?php foreach ($rows as $row) : ?>
