@@ -50,6 +50,8 @@ require 'connection.php';
 
   <br>
 <br>
+Active Users
+<br>
 <br>
   <table border = 1 cellspacing = 0 cellpadding = 10>
       <tr>
@@ -62,7 +64,7 @@ require 'connection.php';
       </tr>
       <?php
       $i = 1;
-      $rows = mysqli_query($conn, "SELECT *FROM users ORDER BY id ASC")
+      $rows = mysqli_query($conn, "SELECT * FROM users WHERE is_archived = 0 ORDER BY id ASC")
       ?>
 
       <?php foreach ($rows as $row) : ?>
@@ -82,6 +84,39 @@ require 'connection.php';
     </table>
     <br>
     
+    Unactive Users
+<br>
+<br>
+  <table border = 1 cellspacing = 0 cellpadding = 10>
+      <tr>
+        <td>User ID</td>
+        <td>Name</td>
+        <td>Date of birth</td>
+        <td>Image</td>
+        <td>Pathology</td>
+        <td>Patient Number</td>
+      </tr>
+      <?php
+      $i = 1;
+      $rows = mysqli_query($conn, "SELECT * FROM users WHERE is_archived = 1 ORDER BY id ASC")
+      ?>
+
+      <?php foreach ($rows as $row) : ?>
+      <tr>
+        <td><?php echo $row["id"]; ?></td>
+        <td><?php echo $row["name"]; ?></td>
+        <td><?php echo $row["date"]; ?></td>
+        <td> <img src="img/<?php echo $row["profile_picture"]; ?>" width = 200 title="<?php echo $row['profile_picture']; ?>"> </td>
+        <td><?php echo $row["pathology"]; ?></td>
+        <td><?php echo $row["id_number"]; ?></td>
+        <td><?php echo '<a href="activeUser.php?id=',$row["id"],'">Activate</a>'; ?></td>
+
+
+
+      </tr>
+      <?php endforeach; ?>
+    </table>
+    <br>
 
   </body>
 </html>
