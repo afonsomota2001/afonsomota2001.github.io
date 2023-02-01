@@ -18,11 +18,12 @@ if($conn->query("SELECT DATABASE()")){
   $result->close();
 
 }
-// Get the prescription_id of the prescription to be archived
+
 $medication_id = $_GET['medication_id'];
 
 // Mark the prescription as archived
-$sql = "DELETE medications WHERE medication_id=$medication_id";
+$medication_id = mysqli_real_escape_string($conn, $_GET['medication_id']);
+$sql = "UPDATE medications SET number_of_pills = 0 WHERE medication_id=$medication_id";
 mysqli_query($conn, $sql);
 
 

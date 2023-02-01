@@ -74,7 +74,7 @@ require 'connection.php';
         <td><?php echo $row["number_of_pills"]; ?></td>
         <td><?php echo '<a href="infoEditMed.php?medication_id=',$row["medication_id"],'">Edit</a>'; ?></td>
         <td><?php echo '<a href="infoAddMed.php?medication_id=',$row["medication_id"],'">Add Pills</a>'; ?></td>
-        <td><?php echo '<a href="infoDeleteMed.php?medication_id=',$row["medication_id"],'">Remove</a>'; ?></td>
+        <td><?php echo '<a href="infoDeleteMed.php?medication_id=',$row["medication_id"],'">Remove All Pills</a>'; ?></td>
         
 
       </tr>
