@@ -44,7 +44,7 @@ if(isset($_POST["submit"])){
       $newImageName .= '.' . $imageExtension;
 
       move_uploaded_file($tmpName, 'img/' . $newImageName);
-      $query = "INSERT INTO users VALUES ('$id','$name','$pathology','$email','$password','$date','$id_number','$newImageName')";
+      $query = "INSERT INTO users VALUES ('$id','$name','$pathology','$email','$password','$date','$id_number','$newImageName', 0)";
       mysqli_query($conn, $query);
       echo
       "
