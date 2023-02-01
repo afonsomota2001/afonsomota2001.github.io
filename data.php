@@ -109,7 +109,7 @@ Active Users
         <td> <img src="img/<?php echo $row["profile_picture"]; ?>" width = 200 title="<?php echo $row['profile_picture']; ?>"> </td>
         <td><?php echo $row["pathology"]; ?></td>
         <td><?php echo $row["id_number"]; ?></td>
-        <td><?php echo '<a href="activeUser.php?id=',$row["id"],'">Activate</a>'; ?></td>
+        <td><?php echo '<a href="activateUser.php?id=',$row["id"],'">Activate</a>'; ?></td>
 
 
 

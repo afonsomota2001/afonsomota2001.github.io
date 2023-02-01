@@ -8,7 +8,9 @@ if(isset($_POST["submit"])){
   $id_number = $_POST["id_number"];
   $email = $_POST["email"];
   $password = $_POST["password"];
-
+  $result = mysqli_query($conn, "SELECT COUNT(*) as count FROM users WHERE is_archived = 0");
+  $row = mysqli_fetch_assoc($result);
+  $count = $row['count'];
 
   if($_FILES["image"]["error"] == 4){
     echo
@@ -40,6 +42,7 @@ if(isset($_POST["submit"])){
       ";
     }
     else{
+      if ($count<=3){
       $newImageName = uniqid();
       $newImageName .= '.' . $imageExtension;
 
@@ -53,6 +56,22 @@ if(isset($_POST["submit"])){
         document.location.href = 'data.php';
       </script>
       ";
+      }else{
+        $newImageName = uniqid();
+        $newImageName .= '.' . $imageExtension;
+  
+        move_uploaded_file($tmpName, 'img/' . $newImageName);
+        $query = "INSERT INTO users VALUES ('$id','$name','$pathology','$email','$password','$date','$id_number','$newImageName', 1)";
+        mysqli_query($conn, $query);
+        echo
+        "
+        <script>
+          alert('The user was added but it is set as unactive due to the fact that there is already 4 active users');
+          document.location.href = 'data.php';
+        </script>
+        ";
+      }
+      
     }
   }
 }
