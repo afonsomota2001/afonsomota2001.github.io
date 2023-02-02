@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Fev-2023 às 11:30
+-- Tempo de geração: 02-Fev-2023 às 11:17
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -24,23 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `archivedprescriptions`
---
-
-CREATE TABLE `archivedprescriptions` (
-  `Arch_prescription_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `medication_id` int(11) NOT NULL,
-  `Arch_start_date` date NOT NULL,
-  `Arch_end_date` date NOT NULL,
-  `Arch_notes` varchar(255) NOT NULL,
-  `Arch_times_per_day` int(11) DEFAULT NULL,
-  `Arch_hours_to_take` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `medications`
 --
 
@@ -57,11 +40,12 @@ CREATE TABLE `medications` (
 --
 
 INSERT INTO `medications` (`medication_id`, `name`, `dose`, `frequency`, `number_of_pills`) VALUES
-(1, 'Brufen', '2', '2', 30),
-(3, 'Aerius', '1', '1', 12),
-(4, 'Aspirina', '1', '1', NULL),
-(6, 'Voltaren', '1', '1', NULL),
-(7, 'Singulair', '1', '1', NULL);
+(1, 'Brufen', '2', '2', 0),
+(3, 'Aerius', '1', '1', 0),
+(4, 'Aspirina', '1', '1', 0),
+(6, 'Voltaren', '1', '1', 0),
+(7, 'Singulair', '1', '1', 0),
+(8, 'Midazolam', '1', '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -106,31 +90,25 @@ CREATE TABLE `users` (
   `password` char(64) NOT NULL,
   `date` date NOT NULL,
   `id_number` varchar(255) DEFAULT NULL,
-  `profile_picture` varchar(60) NOT NULL
+  `profile_picture` varchar(60) NOT NULL,
+  `is_archived` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `pathology`, `email`, `password`, `date`, `id_number`, `profile_picture`) VALUES
-(4, 'Afonso', 'asma', 'afonsomota2001@gmail.com', '123456789', '2001-06-19', '100100123', '63a9eb40f2392.jpg'),
-(5, 'Brigite', 'Hipertensão', '1200565@isep.ipp.pt', '123456789', '1977-07-04', '100000004', '63a9e4ef50d17.jpg'),
-(6, 'PAulo', 'diabetes', 'jsdcuwdb@gmail.com', '123456789', '1973-05-24', '100000003', '63a9ea5054edf.jpg'),
-(7, 'Afonso Mota', 'Alergia Ácaros ', 'afonsomota2001@gmail.com', '123456789', '2001-06-19', '123456789', '63aa134e96d64.jpg'),
-(8, 'Test', 'test', 'test@gmail.com', '123456789', '2022-12-27', '100000000', '63ab2e97593cd.jpg');
+INSERT INTO `users` (`id`, `name`, `pathology`, `email`, `password`, `date`, `id_number`, `profile_picture`, `is_archived`) VALUES
+(4, 'Afonso', 'asma', 'afonsomota2001@gmail.com', '123456789', '2001-06-19', '100100123', '63a9eb40f2392.jpg', 0),
+(5, 'Brigite', 'Hipertensão', '1200565@isep.ipp.pt', '123456789', '1977-07-04', '100000004', '63a9e4ef50d17.jpg', 0),
+(6, 'PAulo', 'diabetes', 'jsdcuwdb@gmail.com', '123456789', '1973-05-24', '100000003', '63a9ea5054edf.jpg', 0),
+(7, 'Afonso Mota', 'Alergia Ácaros ', 'afonsomota2001@gmail.com', '123456789', '2001-06-19', '123456789', '63aa134e96d64.jpg', 0),
+(18, 'test', 'test', 'test', '123', '2001-12-12', '100000007', '63db8455206e1.jpg', 1),
+(19, 'test', 'TESTE', 'test', 'test', '1212-12-12', '121212122', '63db84efb2071.jpg', 1);
 
 --
 -- Índices para tabelas despejadas
 --
-
---
--- Índices para tabela `archivedprescriptions`
---
-ALTER TABLE `archivedprescriptions`
-  ADD PRIMARY KEY (`Arch_prescription_id`),
-  ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD UNIQUE KEY `medication_id` (`medication_id`);
 
 --
 -- Índices para tabela `medications`
@@ -157,16 +135,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de tabela `archivedprescriptions`
---
-ALTER TABLE `archivedprescriptions`
-  MODIFY `Arch_prescription_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `medications`
 --
 ALTER TABLE `medications`
-  MODIFY `medication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `medication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `prescriptions`
@@ -178,7 +150,7 @@ ALTER TABLE `prescriptions`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restrições para despejos de tabelas

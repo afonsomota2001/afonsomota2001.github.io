@@ -42,11 +42,11 @@ if(isset($_POST["submit"])){
       ";
     }
     else{
-      if ($count<=3){
       $newImageName = uniqid();
       $newImageName .= '.' . $imageExtension;
-
       move_uploaded_file($tmpName, 'img/' . $newImageName);
+
+      if ($count<=3){
       $query = "INSERT INTO users VALUES ('$id','$name','$pathology','$email','$password','$date','$id_number','$newImageName', 0)";
       mysqli_query($conn, $query);
       echo
@@ -57,10 +57,6 @@ if(isset($_POST["submit"])){
       </script>
       ";
       }else{
-        $newImageName = uniqid();
-        $newImageName .= '.' . $imageExtension;
-  
-        move_uploaded_file($tmpName, 'img/' . $newImageName);
         $query = "INSERT INTO users VALUES ('$id','$name','$pathology','$email','$password','$date','$id_number','$newImageName', 1)";
         mysqli_query($conn, $query);
         echo

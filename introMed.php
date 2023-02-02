@@ -5,12 +5,21 @@ if(isset($_POST["submit"])){
   $name = $_POST["name"];
   $dose = $_POST["dose"];
   $frequency = $_POST["frequency"];
+  $deposit_number = $_POST["deposit_number"]
+  $number_of_pills = $_POST["number_of_pills"]
 
 
   $query = "INSERT INTO `medications` (`medication_id`, `name`, `dose`, `frequency`) VALUES (NULL,  '$name','$dose', '$frequency')";
-  
-  
   mysqli_query($conn, $query);
+
+//pedir o medication id para depois enviar na query do stock
+//$medication_id = 
+
+
+  $query = "INSERT INTO `stock` (`deposit_number`,`medication_id`, `number_of_pills`) VALUES ('$deposit_number','$medication_id', '$number_of_pills')";
+
+  
+  
   echo
       "
       <script>
@@ -49,6 +58,13 @@ if(isset($_POST["submit"])){
   
     <label for="frequency">Frequency:</label><br>
     <input type="text" id="frequency" name="frequency"><br><br>
+
+    Optional
+    <label for="deposit_number">Deposit Number:</label><br>
+    <input type="text" id="deposit_number" name="deposit_number"><br><br>
+
+    <label for="number_of_pills">Number of pills:</label><br>
+    <input type="text" id="number_of_pills" name="number_of_pills"><br><br>
     
     <button type = "submit" name = "submit">Submit</button>
 </form> 
