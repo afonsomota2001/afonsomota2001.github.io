@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Fev-2023 às 11:17
+-- Tempo de geração: 02-Fev-2023 às 16:59
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -32,7 +32,7 @@ CREATE TABLE `medications` (
   `name` varchar(100) NOT NULL,
   `dose` varchar(50) NOT NULL,
   `frequency` varchar(50) NOT NULL,
-  `number_of_pills` int(11) DEFAULT NULL
+  `number_of_pills` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -45,7 +45,7 @@ INSERT INTO `medications` (`medication_id`, `name`, `dose`, `frequency`, `number
 (4, 'Aspirina', '1', '1', 0),
 (6, 'Voltaren', '1', '1', 0),
 (7, 'Singulair', '1', '1', 0),
-(8, 'Midazolam', '1', '1', NULL);
+(8, 'Midazolam', '1', '1', 0);
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,8 @@ INSERT INTO `prescriptions` (`prescription_id`, `user_id`, `medication_id`, `sta
 (13, 4, 3, '2023-01-26', '2023-02-02', 'test 2 hour ', 2, '08:00/20:00', 0),
 (15, 4, 4, '2023-01-26', '2023-01-31', '3 hour test adding one time', 3, '8:00/16:00/00:00', 0),
 (17, 5, 7, '2023-01-26', '2023-01-31', 'test hours times', 2, '08:00/20:00', 0),
-(18, 4, 7, '2023-01-30', '2023-02-07', 'test after broke', 1, '20:00', 0);
+(18, 4, 7, '2023-01-30', '2023-02-07', 'test after broke', 1, '20:00', 0),
+(19, 4, 8, '2023-02-03', '2023-02-28', 'test', 1, '12:00', 0);
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,7 @@ ALTER TABLE `medications`
 -- AUTO_INCREMENT de tabela `prescriptions`
 --
 ALTER TABLE `prescriptions`
-  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `users`
