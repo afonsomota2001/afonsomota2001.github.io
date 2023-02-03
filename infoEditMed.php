@@ -38,14 +38,21 @@ if (isset($_POST["submit"])) {
     $name = $_POST["name"];
     $dose = $_POST["dose"];
     $frequency = $_POST["frequency"];
+    $deposit_number = $_POST["deposit_number"];
+    $number_of_pills = $_POST["number_of_pills"];
 
     // fix the error in SQL syntax
     $query = "UPDATE medications SET name = '$name', dose = '$dose', frequency = '$frequency' WHERE medication_id = '$medication_id'";
     mysqli_query($conn, $query);
+
+    $sqlAdd = "UPDATE stock SET deposit_number = '$deposit_number', number_of_pills = '$number_of_pills' WHERE medication_id = '$medication_id'";
+
+    $result = mysqli_query($conn, $sqlAdd);
+
     echo "
         <script>
-            alert('Successfully Edited');
-            document.location.href = 'dataMed.php';
+            alert('Successfully Edited or Added');
+            document.location.href = 'stock.php';
         </script>
     ";
 }
@@ -54,7 +61,7 @@ if (isset($_POST["submit"])) {
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Edit Medication: <?php echo $row["name"]; ?> </title>
+    <title>Edit Medication: </title>
   </head>
   <body>
   <form class="" action="" method="post" autocomplete="off" enctype="multipart/form-data">
@@ -86,6 +93,26 @@ if (isset($_POST["submit"])) {
         <label for="frequency">New frequency : </label>
         <input type="text" name="frequency" id = "frequency" value="<?php echo $frequency?>"> <br>
         <br>
+
+
+        <label for="deposit_number">Deposit Number:</label><br>
+        <select name="deposit_number">
+          <?php
+          for ($i = 1; $i <= 8; $i++) {
+            $query = "SELECT deposit_number FROM stock WHERE deposit_number = $i";
+            $result = mysqli_query($conn, $query);
+
+          if (mysqli_num_rows($result) == 0) {
+          echo "<option value='$i'>$i</option>";
+          }
+        }
+          ?>
+
+</select><br><br>
+
+    <label for="number_of_pills">Number of pills:</label><br>
+    <input type="text" id="number_of_pills" name="number_of_pills"><br><br>
+    
     
        
         <button type = "submit" name = "submit">Submit</button>

@@ -44,7 +44,7 @@ if(isset($_POST["submit"])){
     </style>
 
 <body>
-<h1 style="background-color:Red;">Medicamento:</h1>
+<h1 style="background-color:Red;">Medication:</h1>
     <form class="" action="" method="post" autocomplete="off" enctype="multipart/form-data">
   
     <label for="name">Name:</label><br>

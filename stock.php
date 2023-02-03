@@ -1,3 +1,7 @@
+<?php
+require 'connection.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <title>Stock</title>
@@ -52,12 +56,41 @@
     }
   </style>
 
-<button onclick = "window.location.href='index.html'" class="button button3">Menu </button> <br>
+<button onclick = "window.location.href='index.html'" class="button button3">Menu </button> 
 <button onclick = "window.location.href='introMed.php'" class="button button1">Insert Medication </button> <br>
 
 
 </head>
+<br>
+  <table border = 1 cellspacing = 0 cellpadding = 10>
+      <tr>
+        <td>Medication ID</td>
+        <td>Name</td>
+        <td>Dose</td>
+        <td>Frequency</td>
 
+      </tr>
+      <?php
+      $i = 1;
+      $rows = mysqli_query($conn, "SELECT m.medication_id, m.name, m.dose, m.frequency, s.number_of_pills
+                              FROM medications m
+                              JOIN stock s ON m.medication_id = s.medication_id
+                              ORDER BY m.name ASC");
+      ?>
+
+      <?php foreach ($rows as $row) : ?>
+      <tr>
+        <td><?php echo $row["medication_id"]; ?></td>
+        <td><?php echo $row["name"]; ?></td>
+        <td><?php echo $row["dose"]; ?></td>
+        <td><?php echo $row["frequency"]; ?></td>
+        
+        <td><?php echo '<a href="infoEditMed.php?medication_id=',$row["medication_id"],'">Edit</a>'; ?></td>
+
+      </tr>
+      <?php endforeach; ?>
+    </table>
+    <br>
 <body>
 <?php
   require 'connection.php';
@@ -89,7 +122,7 @@
         <div class='square'>
           <p>Deposit Number: $i</p>
           <p>Empty</p>
-          <p><a href='infoAddMed.php?medication_id=$medication_id'>Add Pills</a></p>
+
         </div>
       ";
     }
