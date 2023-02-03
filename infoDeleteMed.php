@@ -23,7 +23,7 @@ $medication_id = $_GET['medication_id'];
 
 // Mark the prescription as archived
 $medication_id = mysqli_real_escape_string($conn, $_GET['medication_id']);
-$sql = "UPDATE medications SET number_of_pills = 0 WHERE medication_id=$medication_id";
+$sql = "UPDATE stock SET number_of_pills = 0 WHERE medication_id=$medication_id";
 mysqli_query($conn, $sql);
 
 

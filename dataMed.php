@@ -57,11 +57,15 @@ require 'connection.php';
         <td>Name</td>
         <td>Dose</td>
         <td>Frequency</td>
+        <td>Stock</td>
 
       </tr>
       <?php
       $i = 1;
-      $rows = mysqli_query($conn, "SELECT *FROM medications ORDER BY name ASC")
+      $rows = mysqli_query($conn, "SELECT m.medication_id, m.name, m.dose, m.frequency, s.number_of_pills
+                              FROM medications m
+                              JOIN stock s ON m.medication_id = s.medication_id
+                              ORDER BY m.name ASC");
       ?>
 
       <?php foreach ($rows as $row) : ?>
@@ -70,6 +74,8 @@ require 'connection.php';
         <td><?php echo $row["name"]; ?></td>
         <td><?php echo $row["dose"]; ?></td>
         <td><?php echo $row["frequency"]; ?></td>
+        <td><?php echo $row["number_of_pills"]; ?></td>
+
         <td><?php echo '<a href="infoEditMed.php?medication_id=',$row["medication_id"],'">Edit</a>'; ?></td>
         <td><?php echo '<a href="infoAddMed.php?medication_id=',$row["medication_id"],'">Add Pills</a>'; ?></td>
         <td><?php echo '<a href="infoDeleteMed.php?medication_id=',$row["medication_id"],'">Remove All Pills</a>'; ?></td>
