@@ -57,6 +57,8 @@ if(isset($_POST["submit"])){
     <input type="text" id="frequency" name="frequency"><br><br>
 
     Optional
+    <br>
+    <br>
     <label for="deposit_number">Deposit Number:</label><br>
     <input type="text" id="deposit_number" name="deposit_number"><br><br>
 

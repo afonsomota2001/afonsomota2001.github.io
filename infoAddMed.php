@@ -28,8 +28,6 @@ if (isset($_POST['submit'])) {
 }
 
 
-// adicionar os medicamentos existentes ao stock
-
 
 ?>
 
