@@ -21,7 +21,7 @@ if(isset($_POST["submit"])){
       "
       <script>
         alert('Successfully Added');
-        document.location.href = 'dataMed.php';
+        document.location.href = 'stock.php';
       </script>
       ";
 
@@ -56,11 +56,21 @@ if(isset($_POST["submit"])){
     <label for="frequency">Frequency:</label><br>
     <input type="text" id="frequency" name="frequency"><br><br>
 
-    Optional
-    <br>
-    <br>
+
+
     <label for="deposit_number">Deposit Number:</label><br>
-    <input type="text" id="deposit_number" name="deposit_number"><br><br>
+    <select name="deposit_number">
+  <?php
+  for ($i = 1; $i <= 8; $i++) {
+    $query = "SELECT deposit_number FROM stock WHERE deposit_number = $i";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) == 0) {
+      echo "<option value='$i'>$i</option>";
+    }
+  }
+  ?>
+</select><br><br>
 
     <label for="number_of_pills">Number of pills:</label><br>
     <input type="text" id="number_of_pills" name="number_of_pills"><br><br>

@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
   $sql = "UPDATE stock SET number_of_pills = $num_pills_total WHERE medication_id = $medication_id";
   mysqli_query($conn, $sql);
 
-  header("Location: dataMed.php");
+  header("Location: stock.php");
 
 }
 

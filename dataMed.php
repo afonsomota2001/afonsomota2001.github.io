@@ -6,7 +6,7 @@ require 'connection.php';
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Edit Medications</title>
+    <title>Data Medications</title>
   </head>
   <style>
     .button {
@@ -42,11 +42,12 @@ require 'connection.php';
             background-color: #008CBA;
             color: white;
         }
+
 </style>
 
   <body>
   <button onclick = "window.location.href='index.html'" class="button button1">Menu</button> <br>
-  <button onclick = "window.location.href='introMed.php'" class="button button2">Insert Medication </button> <br>
+  <button onclick = "window.location.href='stock.php'" class="button button2">Check Stock </button> <br>
 
   <br>
 <br>
@@ -57,7 +58,6 @@ require 'connection.php';
         <td>Name</td>
         <td>Dose</td>
         <td>Frequency</td>
-        <td>Stock</td>
 
       </tr>
       <?php
@@ -74,12 +74,8 @@ require 'connection.php';
         <td><?php echo $row["name"]; ?></td>
         <td><?php echo $row["dose"]; ?></td>
         <td><?php echo $row["frequency"]; ?></td>
-        <td><?php echo $row["number_of_pills"]; ?></td>
 
         <td><?php echo '<a href="infoEditMed.php?medication_id=',$row["medication_id"],'">Edit</a>'; ?></td>
-        <td><?php echo '<a href="infoAddMed.php?medication_id=',$row["medication_id"],'">Add Pills</a>'; ?></td>
-        <td><?php echo '<a href="infoDeleteMed.php?medication_id=',$row["medication_id"],'">Remove All Pills</a>'; ?></td>
-        
 
       </tr>
       <?php endforeach; ?>

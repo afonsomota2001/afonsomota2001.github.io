@@ -1,53 +1,102 @@
-<?php
-require 'connection.php';
-
-?>
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
+<title>Stock</title>
+<head>
+<h1 style="background-color:DodgerBlue;">STOCK:</h1>
 
-      th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
-      }
+  <style>
+    .button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
 
-      th {
-        background-color: #f2f2f2;
-      }
-    </style>
-  </head>
-  <body>
-    <?php
-    require 'connection.php';
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 5px solid #FF3333;
+}
 
-    $query = "SELECT medications.medication_id, medications.name, stock.number_of_pills
-              FROM medications
-              INNER JOIN stock
-              ON medications.medication_id = stock.medication_id";
+.button1:hover {
+  background-color: #FF3333;
+  color: white;
+}
+
+.button3 {
+            background-color: white; 
+            color: black; 
+            border: 5px solid pink;
+        }
+
+        .button3:hover {
+            background-color: pink;
+            color: white;
+        }
+
+.square {
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      background-color: lightgray;
+      text-align: center;
+      vertical-align: middle;
+      margin: 10px;
+      padding: 20px;
+    }
+  </style>
+
+<button onclick = "window.location.href='index.html'" class="button button3">Menu </button> <br>
+<button onclick = "window.location.href='introMed.php'" class="button button1">Insert Medication </button> <br>
+
+
+</head>
+
+<body>
+<?php
+  require 'connection.php';
+
+  for ($i = 1; $i <= 8; $i++) {
+    $query = "SELECT s.deposit_number, m.medication_id, m.name, s.number_of_pills
+              FROM stock s
+              INNER JOIN medications m ON s.medication_id = m.medication_id
+              WHERE s.deposit_number = $i";
     $result = mysqli_query($conn, $query);
-    ?>
 
-    <table>
-      <tr>
-        <th>Medication ID</th>
-        <th>Name</th>
-        <th>Number of pills</th>
-      </tr>
-      <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-        <tr>
-          <td><?php echo $row['medication_id']; ?></td>
-          <td><?php echo $row['name']; ?></td>
-          <td><?php echo $row['number_of_pills']; ?></td>
-        </tr>
-      <?php } ?>
-    </table>
-  </body>
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_array($result);
+      $medication_id = $row['medication_id'];
+      $name = $row['name'];
+      $number_of_pills = $row['number_of_pills'];
+      echo "
+        <div class='square'>
+          <p>Deposit Number: $i</p>
+          <p>Medication ID: $medication_id</p>
+          <p>Name: $name</p>
+          <p>Number of Pills: $number_of_pills</p>
+          <p><a href='infoAddMed.php?medication_id=$medication_id'>Add Pills</a></p>
+          <p><a href='infoDeleteMed.php?medication_id=$medication_id'>Remove </a></p>
+        </div>
+      ";
+    } else {
+      echo "
+        <div class='square'>
+          <p>Deposit Number: $i</p>
+          <p>Empty</p>
+          <p><a href='infoAddMed.php?medication_id=$medication_id'>Add Pills</a></p>
+        </div>
+      ";
+    }
+  }
+?>
+
+
+
+</body>
 </html>
-
