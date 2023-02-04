@@ -1,6 +1,7 @@
 <h1 style="background-color:DodgerBlue;">Edit: </h1>
 <?php
 require 'connection.php';
+include 'alert.php';
 
 //Connection Error
 if ($conn->connect_error){     

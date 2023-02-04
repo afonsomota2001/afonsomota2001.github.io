@@ -1,5 +1,6 @@
 <?php
 require 'connection.php';
+include 'alert.php';
 
 if(isset($_POST["submit"])){
     $email = $_POST['email'];

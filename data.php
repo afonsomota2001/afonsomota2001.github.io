@@ -1,5 +1,6 @@
 <?php
 require 'connection.php';
+include 'alert.php';
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,6 @@
 <?php
 require 'connection.php';
+include 'alert.php';
 
 // Check for connection error
 if ($conn->connect_error) {

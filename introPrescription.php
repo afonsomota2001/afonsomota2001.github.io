@@ -1,5 +1,6 @@
 <?php
 require 'connection.php';
+include 'alert.php';
 
 // Get user ID from login page
 $user_id = $_GET['id'];

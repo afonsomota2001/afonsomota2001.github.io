@@ -1,6 +1,7 @@
 
 <?php
 require 'connection.php';
+include 'alert.php';
 if(isset($_POST["submit"])){
   $name = $_POST["name"];
   $date = date('Y-m-d',strtotime($_POST['dateofbirth']));
