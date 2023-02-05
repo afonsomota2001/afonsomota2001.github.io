@@ -53,16 +53,7 @@ if ($dbSuccess) {
           
 }
 
-if($conn->query("SELECT DATABASE()")){
-     
-    $dbSuccess =true;
-    //
-    $result = $conn->query("SELECT DATABASE()");
-    $row = $result->fetch_row();
-    $result->close();
-
-}
-     
+    
 if(isset($_POST["submit"])){
   $name = $_POST["name"];
   $date = date('Y-m-d',strtotime($_POST['dateofbirth']));
@@ -121,7 +112,6 @@ if(isset($_POST["submit"])){
  
 if ($dbSuccess) {
  
-        //  Get the details of the company selected 
             $infoID = $_GET["id"];
  
        if($infoID ==0){

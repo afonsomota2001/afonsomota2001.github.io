@@ -146,6 +146,7 @@ if ($dbSuccess) {
   <tr>
         <td>Prescription ID</td>
         <td>Medication ID</td>
+        <td>Medication name</td>
         <td>Start Date</td>
         <td>End Date</td>
         <td>Tooks per day</td>
@@ -155,37 +156,43 @@ if ($dbSuccess) {
   </tr>
 
   <?php
-      $queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID AND is_archived = 0 ";
-      $resultMed = mysqli_query($conn, $queryPres);
-      
-  ?>
-  <?php
-  foreach ($resultMed as $rowMed): ?>
+$queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID AND is_archived = 0 ";
+$resultPre = mysqli_query($conn, $queryPres);
 
-  <td><?php echo $rowMed["prescription_id"];?></td>
-  <td><?php echo $rowMed["medication_id"];?></td>
-  <td><?php echo $rowMed["start_date"];?></td>
-  <td><?php echo $rowMed["end_date"];?></td>
-  <td><?php echo $rowMed["times_per_day"];?></td>
-  <td><?php echo $rowMed["hours_to_take"];?></td>
-  <td><?php echo $rowMed["notes"];?></td>
-  <td><?php echo '<a href="EditPrescription.php?prescription_id=',$rowMed["prescription_id"],'">Edit</a>'; ?></td>
-  <td><?php echo '<a href="archivePrescription.php?prescription_id=',$rowMed["prescription_id"],'">Archive</a>'; ?></td>
+while ($rowPres = mysqli_fetch_assoc($resultPre)) {
+    $queryMed = "SELECT * FROM medications WHERE medication_id='" . $rowPres['medication_id'] . "'";
+    $name_select = mysqli_query($conn, $queryMed);
+    $infoMed = mysqli_fetch_assoc($name_select);
+    ?>
+
+  <td><?php echo $rowPres["prescription_id"];?></td>
+  <td><?php echo $rowPres["medication_id"];?></td>
+  <td><?php echo $infoMed["name"];?></td>
+  <td><?php echo $rowPres["start_date"];?></td>
+  <td><?php echo $rowPres["end_date"];?></td>
+  <td><?php echo $rowPres["times_per_day"];?></td>
+  <td><?php echo $rowPres["hours_to_take"];?></td>
+  <td><?php echo $rowPres["notes"];?></td>
+  <td><?php echo '<a href="EditPrescription.php?prescription_id=',$rowPres["prescription_id"],'">Edit</a>'; ?></td>
+  <td><?php echo '<a href="archivePrescription.php?prescription_id=',$rowPres["prescription_id"],'">Archive</a>'; ?></td>
 
    </tr>
-      <?php endforeach; ?>
+      <?php
+      }  
+?> 
+
     </table>
     <br>
-    
 
     Archived Prescriptions 
       <br>
   <br>
 
     <table border="1" cellspacing="0" cellpadding="10">
-  <tr>
+    <tr>
         <td>Prescription ID</td>
         <td>Medication ID</td>
+        <td>Medication name</td>
         <td>Start Date</td>
         <td>End Date</td>
         <td>Tooks per day</td>
@@ -195,23 +202,30 @@ if ($dbSuccess) {
   </tr>
 
   <?php
-      $queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID AND is_archived = 1 ";
-      $resultMed = mysqli_query($conn, $queryPres);
-      
-  ?>
-  <?php
-  foreach ($resultMed as $rowMed): ?>
+$queryPres = "SELECT * FROM prescriptions WHERE user_id = $infoID AND is_archived = 1 ";
+$resultPre = mysqli_query($conn, $queryPres);
 
-  <td><?php echo $rowMed["prescription_id"];?></td>
-  <td><?php echo $rowMed["medication_id"];?></td>
-  <td><?php echo $rowMed["start_date"];?></td>
-  <td><?php echo $rowMed["end_date"];?></td>
-  <td><?php echo $rowMed["times_per_day"];?></td>
-  <td><?php echo $rowMed["hours_to_take"];?></td>
-  <td><?php echo $rowMed["notes"];?></td>
+while ($rowPres = mysqli_fetch_assoc($resultPre)) {
+    $queryMed = "SELECT * FROM medications WHERE medication_id='" . $rowPres['medication_id'] . "'";
+    $name_select = mysqli_query($conn, $queryMed);
+    $infoMed = mysqli_fetch_assoc($name_select);
+    ?>
+
+  <td><?php echo $rowPres["prescription_id"];?></td>
+  <td><?php echo $rowPres["medication_id"];?></td>
+  <td><?php echo $infoMed["name"];?></td>
+  <td><?php echo $rowPres["start_date"];?></td>
+  <td><?php echo $rowPres["end_date"];?></td>
+  <td><?php echo $rowPres["times_per_day"];?></td>
+  <td><?php echo $rowPres["hours_to_take"];?></td>
+  <td><?php echo $rowPres["notes"];?></td>
+  <td><?php echo '<a href="activatePrescription.php?prescription_id=',$rowPres["prescription_id"],'">Reactivate</a>'; ?></td>
 
    </tr>
-      <?php endforeach; ?>
+      <?php
+      }  
+?> 
+
     </table>
     <br>
   </body>
