@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Fev-2023 às 16:59
+-- Tempo de geração: 06-Fev-2023 às 12:04
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -31,21 +31,27 @@ CREATE TABLE `medications` (
   `medication_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `dose` varchar(50) NOT NULL,
-  `frequency` varchar(50) NOT NULL,
-  `number_of_pills` int(11) NOT NULL
+  `frequency` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `medications`
 --
 
-INSERT INTO `medications` (`medication_id`, `name`, `dose`, `frequency`, `number_of_pills`) VALUES
-(1, 'Brufen', '2', '2', 0),
-(3, 'Aerius', '1', '1', 0),
-(4, 'Aspirina', '1', '1', 0),
-(6, 'Voltaren', '1', '1', 0),
-(7, 'Singulair', '1', '1', 0),
-(8, 'Midazolam', '1', '1', 0);
+INSERT INTO `medications` (`medication_id`, `name`, `dose`, `frequency`) VALUES
+(1, 'Brufen', '2', '2'),
+(3, 'Aerius', '1', '1'),
+(4, 'Aspirina', '1', '1'),
+(6, 'Voltaren', '1', '1'),
+(7, 'Singulair', '1', '1'),
+(8, 'Midazolam', '1', '1'),
+(9, 'Rivaroxabana', '1', '1'),
+(10, 'Rivaroxabana', '1', '1'),
+(11, 'TEST', '1', '1'),
+(14, 'ttesttt', '1', '1'),
+(15, 'Testeeee', '1', '1'),
+(16, 'test 66', '1', ''),
+(17, 'test', '2', '2');
 
 -- --------------------------------------------------------
 
@@ -71,7 +77,7 @@ CREATE TABLE `prescriptions` (
 
 INSERT INTO `prescriptions` (`prescription_id`, `user_id`, `medication_id`, `start_date`, `end_date`, `notes`, `times_per_day`, `hours_to_take`, `is_archived`) VALUES
 (10, 4, 1, '2023-01-26', '2023-01-27', 'test hour', 1, '20:00', 0),
-(13, 4, 3, '2023-01-26', '2023-02-02', 'test 2 hour ', 2, '08:00/20:00', 0),
+(13, 4, 3, '2023-01-26', '2023-02-02', 'test 2 hour ', 2, '08:00/20:00', 1),
 (15, 4, 4, '2023-01-26', '2023-01-31', '3 hour test adding one time', 3, '8:00/16:00/00:00', 0),
 (17, 5, 7, '2023-01-26', '2023-01-31', 'test hours times', 2, '08:00/20:00', 0),
 (18, 4, 7, '2023-01-30', '2023-02-07', 'test after broke', 1, '20:00', 0),
@@ -100,7 +106,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `pathology`, `email`, `password`, `date`, `id_number`, `profile_picture`, `is_archived`) VALUES
-(4, 'Afonso', 'asma', 'afonsomota2001@gmail.com', '123456789', '2001-06-19', '100100123', '63a9eb40f2392.jpg', 0),
+(4, 'Afonso', 'asma', 'afonsomota2001@gmail.com', '123456789', '2001-06-19', '100100123', '63de8d83e3d41.jpg', 0),
 (5, 'Brigite', 'Hipertensão', '1200565@isep.ipp.pt', '123456789', '1977-07-04', '100000004', '63a9e4ef50d17.jpg', 0),
 (6, 'PAulo', 'diabetes', 'jsdcuwdb@gmail.com', '123456789', '1973-05-24', '100000003', '63a9ea5054edf.jpg', 0),
 (7, 'Afonso Mota', 'Alergia Ácaros ', 'afonsomota2001@gmail.com', '123456789', '2001-06-19', '123456789', '63aa134e96d64.jpg', 0),
@@ -139,7 +145,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `medications`
 --
 ALTER TABLE `medications`
-  MODIFY `medication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `medication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `prescriptions`

@@ -219,7 +219,6 @@ while ($rowPres = mysqli_fetch_assoc($resultPre)) {
   <td><?php echo $rowPres["times_per_day"];?></td>
   <td><?php echo $rowPres["hours_to_take"];?></td>
   <td><?php echo $rowPres["notes"];?></td>
-  <td><?php echo '<a href="activatePrescription.php?prescription_id=',$rowPres["prescription_id"],'">Reactivate</a>'; ?></td>
 
    </tr>
       <?php

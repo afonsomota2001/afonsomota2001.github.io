@@ -1,4 +1,4 @@
-<h1 style="background-color:DodgerBlue;">Edit: </h1>
+<h1 style="background-color:DodgerBlue;">Edit Medication: </h1>
 <?php
 require 'connection.php';
 include 'alert.php';

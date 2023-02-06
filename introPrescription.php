@@ -15,7 +15,7 @@ if(isset($_POST["submit"])){
     $hours_to_take = $_POST['hours_to_take'];
     $hours_array = explode('/', $hours_to_take);
 
-
+// verifica se há o medicamento na base de dados
     $check_medication_query = "SELECT * FROM medications WHERE medication_id = '$medication_id'";
     $check_medication_result = mysqli_query($conn, $check_medication_query);
     
@@ -27,12 +27,12 @@ if(isset($_POST["submit"])){
         exit();
     }
 
-    // Check if a prescription with the same medication ID already exists for the user
-    $check_query = "SELECT * FROM prescriptions WHERE user_id = '$user_id' AND medication_id = '$medication_id'";
+    // Verifica se já existe uma prescrição ativa para este utilizador
+    $check_query = "SELECT * FROM prescriptions WHERE user_id = '$user_id' AND medication_id = '$medication_id'AND is_archived = 0";
     $check_result = mysqli_query($conn, $check_query);
     if(mysqli_num_rows($check_result) > 0){
         echo "<script>
-        alert('A prescription for that medication already exists for this user. Please enter a different medication.'); 
+        alert('An active prescription for that medication already exists for this user. Please enter a different medication.'); 
         document.location.href = 'mainUser.php?id=$user_id';
         </script>";
       
