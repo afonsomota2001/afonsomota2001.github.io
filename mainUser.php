@@ -99,7 +99,6 @@ if ($dbSuccess) {
             background-color: white; 
             color: #ffe600; 
             border: 5px solid #ffe600;
-            font-size: 32px;
         }
 
 .button5:hover {
@@ -110,9 +109,10 @@ if ($dbSuccess) {
 </style>
 
   <body>
-  <button onclick = "window.location.href='index.html'" class="button button1">Menu </button> <br>
-  <button onclick = "window.location.href='introPrescription.php?id=<?php echo $user_id; ?>'" class="button button3">Insert Prescription</button>
+  <button onclick = "window.location.href='index.html'" class="button button1">Back to main page </button> <br>
   <button onclick = "window.location.href='logout.php'" class="button button5">Logout </button> <br>
+<br><br>
+  <button onclick = "window.location.href='introPrescription.php?id=<?php echo $user_id; ?>'" class="button button3">Insert Prescription</button>
       
  
   <br>
