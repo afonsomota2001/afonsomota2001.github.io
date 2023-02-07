@@ -95,14 +95,25 @@ if ($dbSuccess) {
             background-color: #00F7FF;
             color: white;
         }
+.button5 {
+            background-color: white; 
+            color: #ffe600; 
+            border: 5px solid #ffe600;
+            font-size: 32px;
+        }
+
+.button5:hover {
+            background-color: #ffe600;
+            color: white;
+        }
 
 </style>
 
   <body>
   <button onclick = "window.location.href='index.html'" class="button button1">Menu </button> <br>
-  <button onclick = "window.location.href='introUser.php'" class="button button2">Upload User </button> <br>
   <button onclick = "window.location.href='introPrescription.php?id=<?php echo $user_id; ?>'" class="button button3">Insert Prescription</button>
-
+  <button onclick = "window.location.href='logout.php'" class="button button5">Logout </button> <br>
+      
  
   <br>
 <br>

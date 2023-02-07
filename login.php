@@ -1,28 +1,38 @@
 <?php
+
+if (isset($_COOKIE["user_id"])) {
+  $user_id = $_COOKIE["user_id"];
+  header("Location: mainUser.php?id=$user_id");
+  exit();
+}
 require 'connection.php';
-include 'alert.php';
+
 
 if(isset($_POST["submit"])){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-$query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
-$result = mysqli_query($conn, $query);
+  // Get the user's input
+  $email = mysqli_real_escape_string($conn, $_POST["email"]);
+  $password = mysqli_real_escape_string($conn, $_POST["password"]);
+
+  $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+  $result = mysqli_query($conn, $query);
    
-if (mysqli_num_rows($result) > 0) {
-    // Login successful, show user's personal data
-    $row = mysqli_fetch_assoc($result);
-    $id = $row["id"];
+  if (mysqli_num_rows($result) > 0) {
+    $user = mysqli_fetch_array($result);
+    $user_id = $user["id"];
+
+    // Set the cookie
+    setcookie("user_id", $user_id, time() + 3600 );
 
     // Redirect to mainUser.php page
-    header("Location: mainUser.php?id=$id");
+    header("Location: mainUser.php?id=$user_id");
     exit;
-} else {
+  } else {
     // Login failed, show error message
-    echo "Invalid email or password";
-}
+    echo "Invalid email or password. Please try again.";
+  }
 
-mysqli_close($conn);
+  mysqli_close($conn);
 }
 ?>
 
