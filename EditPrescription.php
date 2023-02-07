@@ -148,19 +148,19 @@ echo '<p>Medicament Name: ' . $MedResult["name"] . '</p>';
 
     
     <label for="start_date">Start Date:</label><br>
-    <input type="date" id="start_date" name="start_date"><br>
+    <input type="date" id="start_date" name="start_date" value="<?php echo $start_date?>" >"<br>
 
     <label for="end_date">End Date:</label><br>
-    <input type="date" id="end_date" name="end_date"><br>
+    <input type="date" id="end_date" name="end_date" value="<?php echo $end_date?>"><br>
 
     <label for="times_per_day">Times to take a day:</label> <br>
-    <input type="text" name="times_per_day" id="times_per_day"> <br>
+    <input type="text" name="times_per_day" id="times_per_day" value="<?php echo $times_to_take_a_day?>"> <br>
     
     <label for="hours_to_take">Hours to take:</label> <br>
-    <input type="text" name="hours_to_take" id="hours_to_take"> <br>
+    <input type="text" name="hours_to_take" id="hours_to_take" value="<?php echo $hours_to_take?>"> <br>
 
     <label for="notes">Notes:</label><br>
-    <textarea id="notes" name="notes"></textarea><br><br>
+    <textarea id="notes" name="notes" value="<?php echo $notes?>"></textarea><br><br>
          
     <button type = "submit" name = "submit">Submit</button>
 

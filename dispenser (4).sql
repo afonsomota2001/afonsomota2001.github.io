@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Fev-2023 às 12:04
+-- Tempo de geração: 07-Fev-2023 às 15:54
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -76,12 +76,13 @@ CREATE TABLE `prescriptions` (
 --
 
 INSERT INTO `prescriptions` (`prescription_id`, `user_id`, `medication_id`, `start_date`, `end_date`, `notes`, `times_per_day`, `hours_to_take`, `is_archived`) VALUES
-(10, 4, 1, '2023-01-26', '2023-01-27', 'test hour', 1, '20:00', 0),
+(10, 4, 1, '2023-01-26', '2023-01-27', 'test hour', 1, '20:00', 1),
 (13, 4, 3, '2023-01-26', '2023-02-02', 'test 2 hour ', 2, '08:00/20:00', 1),
 (15, 4, 4, '2023-01-26', '2023-01-31', '3 hour test adding one time', 3, '8:00/16:00/00:00', 0),
 (17, 5, 7, '2023-01-26', '2023-01-31', 'test hours times', 2, '08:00/20:00', 0),
 (18, 4, 7, '2023-01-30', '2023-02-07', 'test after broke', 1, '20:00', 0),
-(19, 4, 8, '2023-02-03', '2023-02-28', 'test', 1, '12:00', 0);
+(19, 4, 8, '2023-02-03', '2023-02-28', 'test', 1, '12:00', 0),
+(20, 4, 1, '2023-02-07', '2023-02-21', 'test med id', 1, '20:00', 0);
 
 -- --------------------------------------------------------
 
@@ -151,7 +152,7 @@ ALTER TABLE `medications`
 -- AUTO_INCREMENT de tabela `prescriptions`
 --
 ALTER TABLE `prescriptions`
-  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `users`
