@@ -14,7 +14,8 @@ if(isset($_POST["submit"])){
   $email = mysqli_real_escape_string($conn, $_POST["email"]);
   $password = mysqli_real_escape_string($conn, $_POST["password"]);
 
-  $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+  if (password_verify($password, $hash)) {
+     $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
   $result = mysqli_query($conn, $query);
    
   if (mysqli_num_rows($result) > 0) {
@@ -27,12 +28,13 @@ if(isset($_POST["submit"])){
     // Redirect to mainUser.php page
     header("Location: mainUser.php?id=$user_id");
     exit;
-  } else {
+} else {
     // Login failed, show error message
     echo "Invalid email or password. Please try again.";
-  }
+}
 
   mysqli_close($conn);
+}
 }
 ?>
 

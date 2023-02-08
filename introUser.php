@@ -9,6 +9,8 @@ if(isset($_POST["submit"])){
   $id_number = $_POST["id_number"];
   $email = $_POST["email"];
   $password = $_POST["password"];
+  $hash = password_hash($password, PASSWORD_DEFAULT);
+
   $result = mysqli_query($conn, "SELECT COUNT(*) as count FROM users WHERE is_archived = 0");
   $row = mysqli_fetch_assoc($result);
   $count = $row['count'];
@@ -48,7 +50,7 @@ if(isset($_POST["submit"])){
       move_uploaded_file($tmpName, 'img/' . $newImageName);
 
       if ($count<=3){
-      $query = "INSERT INTO users VALUES ('$id','$name','$pathology','$email','$password','$date','$id_number','$newImageName', 0)";
+      $query = "INSERT INTO users VALUES ('$id','$name','$pathology','$email','$hash','$date','$id_number','$newImageName', 0)";
       mysqli_query($conn, $query);
       echo
       "
@@ -98,7 +100,7 @@ if(isset($_POST["submit"])){
         <input type="text" name="email" id = "email" required value=""> <br>
 
         <label for="password">Password: </label>
-        <input type="text" name="password" id = "password" required value=""> <br>
+        <input type="password" name="password" id = "password" required value=""> <br>
     
       <label for="name">Nome : </label>
         <input type="text" name="name" id = "name" required value=""> <br>
