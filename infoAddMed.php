@@ -10,6 +10,18 @@ if ($conn->connect_error) {
 // Get the medication_id from the URL
 $medication_id = $_GET['medication_id'];
 
+// get user_id from cookie
+if (isset($_COOKIE["user_id"])) {
+  $user_id = $_COOKIE["user_id"];
+} else {
+  echo
+        "
+        <script>
+          alert('~First iniciate session');
+          document.location.href = 'index.html';
+        </script>
+        ";
+}
 
 if (isset($_POST['submit'])) {
 
@@ -26,7 +38,7 @@ if (isset($_POST['submit'])) {
 
   date_default_timezone_set('GMT'); 
   $current_time = date("Y-m-d H:i:s");
-  $sql_historic = "INSERT INTO historic_add VALUES ('$add_id', '$medication_id', '$current_time' , '$num_pills_toAdd')";
+  $sql_historic = "INSERT INTO historic_add VALUES ('$add_id', '$medication_id', '$current_time' , '$num_pills_toAdd', $user_id)";
   
   mysqli_query($conn, $sql_historic);
 
