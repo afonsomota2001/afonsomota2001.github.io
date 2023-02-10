@@ -15,7 +15,7 @@ if(isset($_POST["submit"])){
   $password = mysqli_real_escape_string($conn, $_POST["password"]);
 
   if (password_verify($password, $hash)) {
-     $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+      $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
   $result = mysqli_query($conn, $query);
    
   if (mysqli_num_rows($result) > 0) {
