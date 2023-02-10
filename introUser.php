@@ -116,6 +116,8 @@ if(isset($_POST["submit"])){
 
       <label for="image">Fotografia : </label>
       <input type="file" name="image" id = "image" accept=".jpg, .jpeg, .png" value=""> <br> <br>
+
+       <!-- fazer form para inserir datas-->
       
       <button type = "submit" name = "submit">Submit</button>
     </form>

@@ -24,10 +24,15 @@ if (isset($_POST['submit'])) {
   $sql = "UPDATE stock SET number_of_pills = $num_pills_total WHERE medication_id = $medication_id";
   mysqli_query($conn, $sql);
 
+  date_default_timezone_set('GMT'); 
+  $current_time = date("Y-m-d H:i:s");
+  $sql_historic = "INSERT INTO historic_add VALUES ('$add_id', '$medication_id', '$current_time' , '$num_pills_toAdd')";
+  
+  mysqli_query($conn, $sql_historic);
+
   header("Location: stock.php");
 
-}
-
+} 
 
 
 ?>
